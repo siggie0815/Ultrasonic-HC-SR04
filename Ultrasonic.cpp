@@ -4,19 +4,15 @@
 // This code is licensed under Creative Commons Share alike
 // and Attribution by J.Rodrigo ( http://www.jrodrigo.net ).
 
-#if ARDUINO >= 100
-  #include "Arduino.h"
-#else
-  #include "WProgram.h"
-#endif
-
 #include "Ultrasonic.h"
 
-Ultrasonic::Ultrasonic(int TP, int EP)
-  :trigPin(TP), echoPin(EP), timeOut(3000){}
+Ultrasonic::Ultrasonic(int TP, int EP) :
+    trigPin(TP), echoPin(EP), timeOut(23310)
+{}
 
-Ultrasonic::Ultrasonic(int TP, int EP, long TO)
-  :trigPin(TP), echoPin(EP), timeOut(TO){}
+Ultrasonic::Ultrasonic(int TP, int EP, long TO) :
+    trigPin(TP), echoPin(EP), timeOut(TO)
+{}
 
 void Ultrasonic::Config() {
   pinMode(this->trigPin, OUTPUT);
@@ -33,12 +29,13 @@ void Ultrasonic::Timing() {
   this->duration = pulseIn(this->echoPin, HIGH, this->timeOut);
 
   if (duration == 0)
-	 this->duration = this->timeOut;
-   return;
+    this->duration = this->timeOut;
+  
+  return;
 }
 
 long Ultrasonic::Ranging(int sys) {
   Timing();
-	return sys ? this->duration /29 / 2 :
-               this->duration / 74 / 2;
+  return sys ? this->duration / 58 : // cm
+               this->duration / 147; // in
 }

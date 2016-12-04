@@ -13,22 +13,23 @@
   #include "WProgram.h"
 #endif
 
-#define CM true
-#define INC false
+#define CM  1
+#define INC 0
 
 class Ultrasonic {
   public:
-    //Construtores.
+    //Constructors.
     Ultrasonic(int TP, int EP);
-	  Ultrasonic(int TP, int EP, long TO);
+    Ultrasonic(int TP, int EP, long TO);
 
-    //Funcoes.
+    //Functions
     void Timing();
     long Ranging(int sys);
     void Config();
+    
   private:
-    int trigPin, echoPin;
-	  long  timeOut, duration;
+    int  trigPin, echoPin;
+    long timeOut, duration;
 };
 
 #endif
